@@ -8,10 +8,10 @@ module Accessible
   def check_user
     if current_supervisor
       flash.clear
-      redirect_to(supervisor_session_path) && return
+      redirect_to(root_path) && return
     elsif current_employee
       flash.clear
-      redirect_to(employee_session_path) && return
+      redirect_to(root_path) && return
     end
   end
 end
