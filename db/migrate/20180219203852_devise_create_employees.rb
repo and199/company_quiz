@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+class DeviseCreateEmployees < ActiveRecord::Migration[5.1]
+  def change
+    create_table :employees do |t|
+      t.string :email,              null: false, default: ""
+      t.string :encrypted_password, null: false, default: ""
+
+      t.timestamps null: false
+    end
+
+    add_index :employees, :email,                unique: true
+  end
+end
