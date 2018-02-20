@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180219220621) do
+ActiveRecord::Schema.define(version: 20180220224557) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "employee_id"
+    t.integer "question_id"
+    t.string "answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_answers_on_employee_id"
+    t.index ["question_id"], name: "index_answers_on_question_id"
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -18,7 +28,24 @@ ActiveRecord::Schema.define(version: 20180219220621) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.integer "supervisor_id"
     t.index ["email"], name: "index_employees_on_email", unique: true
+    t.index ["supervisor_id"], name: "index_employees_on_supervisor_id"
+  end
+
+  create_table "question_choices", force: :cascade do |t|
+    t.integer "question_id"
+    t.string "choice"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["question_id"], name: "index_question_choices_on_question_id"
+  end
+
+  create_table "questions", force: :cascade do |t|
+    t.string "question"
+    t.string "correct_answer"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "supervisors", force: :cascade do |t|
