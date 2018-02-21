@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'employees/show'
+
   get 'questions/show'
 
   root to: 'static_pages#home'
