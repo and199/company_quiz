@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'questions/show'
+
   root to: 'static_pages#home'
 
   devise_for :employees, controllers: {

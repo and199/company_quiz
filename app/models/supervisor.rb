@@ -1,7 +1,8 @@
 class Supervisor < ApplicationRecord
-  devise :database_authenticatable
-  
+  devise :database_authenticatable, :validatable
+
   has_many :employees
 
-  validates_presence_of :email, :name
+  validates :email, presence: true
+  validates :name, presence: true
 end

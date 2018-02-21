@@ -1,7 +1,9 @@
 class Employee < ApplicationRecord
-  devise :database_authenticatable
+  devise :database_authenticatable, :validatable
 
   belongs_to :supervisor
+  has_many :answers
 
-  validates_presence_of :email, :name
+  validates :email, presence: true
+  validates :name, presence: true
 end
