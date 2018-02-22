@@ -1,9 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'employees/show'
-
-  get 'questions/show'
-
   root to: 'static_pages#home'
 
   devise_for :employees, controllers: {
@@ -14,6 +9,8 @@ Rails.application.routes.draw do
       sessions: 'supervisors/sessions'
   }
 
-  resources :supervisors
+  resources :supervisors, only: [:show]
+  resources :employees, only: [:show]
+  resources :questions, only: [:show]
 end
 

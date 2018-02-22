@@ -1,2 +1,8 @@
 <h1><%= current_employee.name %></h1>
-<p>Find me in app/views/employees/show.html.erb</p>
+<% if current_employee.quiz_taken %>
+  <p>Gratulacje, zrobiłeś test!</p>
+<% else %>
+  <p>Jeszcze nie zrobiłeś quizu. Kliknij na poniższy przycisk żeby rozpocząć test.</p>
+  <%= link_to 'ROZPOCZNIJ TEST', question_path(@questions.pop), class: 'btn btn-info' %>
+
+<% end %>
