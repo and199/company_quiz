@@ -1,2 +1,35 @@
-<h1>Questions#show</h1>
-<p>Find me in app/views/questions/show.html.erb</p>
+<div id="countdown"></div>
+<h1><%= @question.question %></h1>
+<%= form_for @question, url: answer_path(@question), method: :patch do |f| %>
+  <% @question.choices.shuffle.each do |choice| %>
+    <div class="radio">
+    <%= f.radio_button(:choices, choice.id) %>
+    <%= f.label(:choices, choice.choice ) %>
+    </div>
+  <% end %>
+  <%= f.submit 'Zatwierdź odpowiedź' %>
+<% end %>
+
+<script>
+    window.onload = function(){
+
+        (function(){
+            var counter = 30;
+
+            setInterval(function() {
+                counter--;
+                if (counter >= 0) {
+                    span = document.getElementById("countdown");
+                    span.innerHTML = counter;
+                }
+                if (counter === 0) {
+                    console.log('this is where it happens');
+                    clearInterval(counter);
+                }
+
+            }, 1000);
+
+        })();
+
+    }
+  </script>

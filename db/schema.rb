@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20180221000725) do
   create_table "answers", force: :cascade do |t|
     t.integer "employee_id"
     t.integer "question_id"
-    t.string "answer"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["employee_id"], name: "index_answers_on_employee_id"
@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20180221000725) do
   end
 
   create_table "questions", force: :cascade do |t|
-    t.string "question"
+    t.string "content"
     t.string "correct_answer"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

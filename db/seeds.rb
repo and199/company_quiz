@@ -19,21 +19,21 @@ Employee.create(name: "Zbigniew Przybylski", email: "employee8@example.com", sup
 Employee.create(name: "Tomasz Cieślak", email: "employee9@example.com", supervisor: Supervisor.second, password: "password")
 Employee.create(name: "Wojciech Adamski", email: "employee10@example.com", supervisor: Supervisor.second, password: "password")
 
-question1 = Question.create(question: "Kto założył firmę?", correct_answer: "Adam")
+question1 = Question.create(content: "Kto założył firmę?", correct_answer: "Adam")
 %w(Adam Bartek Cyryl Daniel).each { |choice| question1.choices.create(choice: choice) }
-question2= Question.create(question: "W którym roku powstała firma?", correct_answer: "1990")
+question2= Question.create(content: "W którym roku powstała firma?", correct_answer: "1990")
 %w(1990 1995 2000 2005).each { |choice| question2.choices.create(choice: choice) }
-question3= Question.create(question: "Ilu pracowników ma firma?", correct_answer: "5000")
+question3= Question.create(content: "Ilu pracowników ma firma?", correct_answer: "5000")
 %w(5000 4000 3000 2000).each { |choice| question3.choices.create(choice: choice) }
-question4 = Question.create(question: "Gdzie firma nie ma siedziby?", correct_answer: "Niemcy")
+question4 = Question.create(content: "Gdzie firma nie ma siedziby?", correct_answer: "Niemcy")
 %w(Niemcy Polska Indie Francja).each { |choice| question4.choices.create(choice: choice) }
-question5 = Question.create(question: "Czym zajmuje się firma?", correct_answer: "IT")
+question5 = Question.create(content: "Czym zajmuje się firma?", correct_answer: "IT")
 %w(IT Księgowość Transport Szkolenia).each { |choice| question5.choices.create(choice: choice) }
 
 # Employee.all.each do |employee|
 #   questions = Question.all.to_a
 #   3.times do
 #     question = questions.shuffle!.pop
-#     employee.answers.create(question: question, answer: question.choices.sample.choice)
+#     employee.answers.create(question: question, content: question.choices.sample.choice)
 #   end
 # end

@@ -2,7 +2,6 @@ class Answer < ApplicationRecord
   belongs_to :employee
   belongs_to :question
 
-  validates :answer, presence: true
-
-  scope :not_given, -> { where(answer: nil) }
+  scope :not_given, -> { where(content: [nil, ""]) }
+  scope :question_ids, -> { pluck(:question_id) }
 end
