@@ -1,13 +1,13 @@
 <div id="countdown"></div>
-<h1><%= @question.question %></h1>
+<h1><%= @question.content %></h1>
 <%= form_for @question, url: answer_path(@question), method: :patch do |f| %>
   <% @question.choices.shuffle.each do |choice| %>
     <div class="radio">
     <%= f.radio_button(:choices, choice.id) %>
-    <%= f.label(:choices, choice.choice ) %>
+    <%= f.label(:choices, choice.content ) %>
     </div>
   <% end %>
-  <%= f.submit 'Zatwierdź odpowiedź' %>
+  <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', disabled: true %>
 <% end %>
 
 <script>
@@ -31,5 +31,11 @@
 
         })();
 
+
     }
+    $(document).ready(function() {
+        $('.edit_question').on('change', 'input', function() {
+            $('#submit').removeAttr('disabled')
+        });
+    })
   </script>

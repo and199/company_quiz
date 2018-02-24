@@ -1,18 +1,13 @@
 class AnswersController < ApplicationController
-  def create
-
-  end
-
   def update
-    if params[:question]
-      answer = Answer.find_by(question_id: params[:id], employee_id: current_user.id)
-      employee_answer = Question.find(params[:id]).choices.find(params[:question][:choices]).choice
-      answer.update_attribute('answer', employee_answer)
-      next_question_id = current_user.answers.not_given.question_ids.sample
-      redirect_to question_path(next_question_id)
+    answer = Answer.find_by(question_id: params[:id], employee_id: current_user.id)
+    employee_answer = Question.find(params[:id]).choices.find(params[:question][:choices]).content
+    answer.update_attribute('content', employee_answer)
+    session[:questions].delete(params[:id].to_i)
+    if session[:questions].blank?
+      redirect_to employee_path(current_employee)
     else
-      flash.now[:notice] = "Proszę zaznaczyć odpowiedź"
-      status :ok
+      redirect_to question_path(Question.find(session[:questions].sample))
     end
   end
 end

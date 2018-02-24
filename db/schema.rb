@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20180221000725) do
 
   create_table "question_choices", force: :cascade do |t|
     t.integer "question_id"
-    t.string "choice"
+    t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["question_id"], name: "index_question_choices_on_question_id"

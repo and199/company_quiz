@@ -1,5 +1,5 @@
 class QuestionChoice < ApplicationRecord
   belongs_to :question
 
-  validates :choice, presence: true
+  validates :content, presence: true
 end

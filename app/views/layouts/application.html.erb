@@ -12,8 +12,9 @@
     <div class="container">
       <div class="row">
         <div class="col-6 mx-auto">
-          <p class="notice"><%= notice %></p>
-          <p class="alert"><%= alert %></p>
+          <% flash.each do |message_type, message| %>
+            <%= content_tag :div, message, class: "alert alert-#{message_type}" %>
+          <% end %>
           <%= yield %>
         </div>
       </div>

@@ -1,8 +1,12 @@
-<h1><%= current_employee.name %></h1>
-<% if current_employee.quiz_taken %>
+<h1>Witaj, <%= current_employee.name %></h1>
+<% if session[:questions].nil? %>
   <p>Gratulacje, zrobiłeś test!</p>
+<% elsif session[:questions].size < 3 %>
+  <p>Nie dokończyłeś quizu. Kliknij poniższy przycisk aby dokończyć.</p>
+  <%= link_to 'DOKOŃCZ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
 <% else %>
   <p>Jeszcze nie zrobiłeś quizu. Kliknij na poniższy przycisk żeby rozpocząć test.</p>
-  <%= link_to 'ROZPOCZNIJ TEST', question_path(@questions.pop), class: 'btn btn-info' %>
-
+  <%= link_to 'ROZPOCZNIJ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
 <% end %>
+
+<%= link_to "Wyloguj się", destroy_employee_session_path, method: :delete %>
