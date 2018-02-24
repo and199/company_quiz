@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   def update
     answer = Answer.find(params[:id])
-    
+
     if request.xhr?
       flash[:alert] = "Czas na odpowiedź dla poprzedniego pytania został przekroczony."
       answer.update_attribute('content', "time_is_up")
@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
   end
 
   def question_id
-    (params[:question_id] || params[:question][:id]).to_i
+    (params[:question_id] || params[:question][:question_id]).to_i
   end
 
   def next_question

@@ -5,42 +5,19 @@
 <% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
 
 <%= form_for @question, url: answer_path(answer_id), method: :patch do |f| %>
-  <%= f.hidden_field 'id', value: @question.id %>
+  <%= f.hidden_field 'question_id', value: @question.id, id: 'question_id' %>
+  <%= f.hidden_field 'answer_id', value: answer_id, id: 'answer_id' %>
   <% @question.choices.shuffle.each do |choice| %>
     <div class="radio">
-      <%= f.radio_button(:choices, choice.id) %>
-      <%= f.label(:choices, choice.content ) %>
+      <%= f.label :choices do %>
+        <%= f.radio_button(:choices, choice.id) %>
+        <%= choice.content %>
+      <% end %>
     </div>
   <% end %>
   <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', disabled: true %>
 <% end %>
 
-<script>
-    $(document).ready(function() {
-        $('.edit_question').on('change', 'input', function() {
-            $('#submit').removeAttr('disabled')
-        });
+<%= javascript_include_tag 'question' %>
 
-        var seconds = 100;
-        var counter = setInterval(function() {
-            seconds--;
-            if (seconds > 0) {
-                $('#countdown').html(seconds);
-            } else {
-                $('#countdown').html(seconds);
-                clearInterval(counter);
-                timeIsUpNextQuestion();
-            }
-        }, 1000);
 
-        function timeIsUpNextQuestion() {
-            $.ajax({
-                type: 'PATCH',
-                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
-                url: "/answers/" + <%= answer_id %>,
-                data: {
-                    question_id: <%= @question.id %>
-                }
-            })}
-    })
-  </script>
