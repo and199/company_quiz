@@ -9,4 +9,4 @@
   <%= link_to 'ROZPOCZNIJ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
 <% end %>
 
-<%= link_to "Wyloguj się", destroy_employee_session_path, method: :delete %>
+<%= link_to "Wyloguj się", destroy_employee_session_path, method: :delete, class: 'btn btn-danger float-right' %>

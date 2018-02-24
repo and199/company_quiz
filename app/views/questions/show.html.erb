@@ -1,4 +1,4 @@
-<div id="countdown"></div>
+<div id="countdown">30</div>
 <h1><%= @question.content %></h1>
 <%= form_for @question, url: answer_path(@question), method: :patch do |f| %>
   <% @question.choices.shuffle.each do |choice| %>
@@ -11,31 +11,30 @@
 <% end %>
 
 <script>
-    window.onload = function(){
-
-        (function(){
-            var counter = 30;
-
-            setInterval(function() {
-                counter--;
-                if (counter >= 0) {
-                    span = document.getElementById("countdown");
-                    span.innerHTML = counter;
-                }
-                if (counter === 0) {
-                    console.log('this is where it happens');
-                    clearInterval(counter);
-                }
-
-            }, 1000);
-
-        })();
-
-
-    }
     $(document).ready(function() {
         $('.edit_question').on('change', 'input', function() {
             $('#submit').removeAttr('disabled')
         });
+
+        var seconds = 3;
+        var counter = setInterval(function() {
+            seconds--;
+            if (seconds > 0) {
+                $('#countdown').html(seconds);
+            } else {
+                $('#countdown').html(seconds);
+                clearInterval(counter);
+                timeIsUpNextQuestion();
+            }
+        }, 1000);
+
+        function timeIsUpNextQuestion() {
+            $.ajax({
+                url: "/answers",
+                type: 'PATCH',
+                data: {
+                    id: <%= @question.id %>
+                }
+        })}
     })
   </script>
