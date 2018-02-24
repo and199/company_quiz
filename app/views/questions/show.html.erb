@@ -1,6 +1,6 @@
-<div id="countdown">30</div>
+<div id="countdown">60</div>
 
-<h1><%= @question.content %></h1>
+<h3><%= @question.content %></h3>
 
 <% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
 
@@ -19,5 +19,4 @@
 <% end %>
 
 <%= javascript_include_tag 'question' %>
-
 

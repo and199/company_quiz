@@ -1,3 +1,14 @@
-<h1>Zaloguj się jako</h1>
-<%= link_to "Pracownik", new_employee_session_path, class: 'btn btn-outline-primary btn-lg mr-3' %>
-<%= link_to "Przełożony", new_supervisor_session_path, class: 'btn btn-outline-primary btn-lg'  %>
+<div class="card text-center">
+  <div class="card-header">
+    Logowanie
+  </div>
+  <div class="card-body">
+    <h5 class="card-title mb-5">W celu zalogowania do systemu prosimy wybrać jedną z poniższych opcji</h5>
+    <%= link_to "Jako pracownik", new_employee_session_path, class: 'btn btn-outline-primary btn-lg mr-3' %>
+    <%= link_to "Jako przełożony", new_supervisor_session_path, class: 'btn btn-outline-primary btn-lg'  %>
+  </div>
+  <div class="card-footer text-muted mt-4">
+    QUIZ DLA PRACOWNIKÓW
+  </div>
+</div>
+

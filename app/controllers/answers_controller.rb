@@ -14,6 +14,12 @@ class AnswersController < ApplicationController
     redirect_to next_step
   end
 
+  def destroy
+    Answer.where(id:  params[:id].split(',')).destroy_all
+    flash[:notice] = "Odpowiedzi pracownika zostały skasowane."
+    redirect_to supervisor_path(current_supervisor)
+  end
+
   private
 
   def remove_question_from_pool
@@ -30,9 +36,5 @@ class AnswersController < ApplicationController
 
   def question_id
     (params[:question_id] || params[:question][:question_id]).to_i
-  end
-
-  def next_question
-    question_path(session[:questions].sample)
   end
 end

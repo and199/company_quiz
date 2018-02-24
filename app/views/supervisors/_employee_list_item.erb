@@ -1,0 +1,45 @@
+<div class="card mb-2">
+  <div class="card-header" role="tab" id="heading_<%= employee.id %>">
+    <h5 class="mb-0">
+      <a data-toggle="collapse" data-parent="#accordion" href="#employee_<%= employee.id %>" aria-expanded="true" aria-controls="employee_<%= employee.id %>"">
+
+        <%= employee.name %>
+        <% if employee.answers.blank? %>
+          <span class="badge badge-secondary badge-pill float-right"">Brak</span>
+        <% elsif employee.answers.not_given.exists?  %>
+          <span class="badge badge-secondary badge-info float-right"">W trakcie</span>
+        <% else %>
+          <span class="badge badge-primary badge-pill float-right"><%= estimate_employee_quiz_result(employee) %>/3</span>
+          <span class="badge badge-danger badge-pill float-right">
+            <%= link_to "Usuń wynik", answer_path(employee.answers.ids.join(',')), method: :delete %>
+          </span>
+        <% end %>
+
+      </a>
+    </h5>
+  </div>
+  <% unless employee.answers.blank? %>
+    <div id="employee_<%= employee.id %>" class="collapse hide" role="tabpanel" aria-labelledby="heading_<%= employee.id %>">
+      <div class="card-block p-3">
+        <table class="table table-hover small">
+          <thead>
+            <tr>
+              <th scope="col">Pytanie</th>
+              <th scope="col">Odpowiedź pracownika</th>
+              <th scope="col">Prawidłowa odpowiedź</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% employee.answers.each do |answer| %>
+            <tr>
+              <td><%= answer.question.content %></td>
+              <td><b><%= answer.content.blank? ? "Brak odpowiedzi" : answer.content %></b></td>
+              <td><%= answer.question.correct_answer %></td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>

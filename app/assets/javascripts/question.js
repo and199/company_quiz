@@ -1,11 +1,11 @@
 function disableCheck() {
     $('.edit_question').on('change', 'input', function() {
-        $('#submit').removeAttr('disabled')
+        $('#submit').removeAttr('disabled');
     });
 }
 
 function makeCountdown() {
-    var seconds = 4;
+    var seconds = 60;
     var counter = setInterval(function () {
         seconds--;
         if (seconds > 0) {

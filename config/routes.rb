@@ -12,6 +12,6 @@ Rails.application.routes.draw do
   resources :supervisors, only: [:show]
   resources :employees, only: [:show]
   resources :questions, only: [:show]
-  resources :answers, only: [:update]
+  resources :answers, only: [:update, :destroy]
 end
 

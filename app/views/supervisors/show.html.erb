@@ -1,2 +1,11 @@
-<h1>Supervisors#show</h1>
-<p>Find me in app/views/supervisors/show.html.erb</p>
+<h1>Witaj, <%= current_supervisor.name %></h1>
+<h5 class="mt-4 mb-3">Lista Twoich pracowników i ich wyniki:</h5>
+
+<% current_supervisor.employees.each do |employee| %>
+  <div id="accordion" role="tablist" aria-multiselectable="true">
+  <%= render 'employee_list_item', employee: employee %>
+  </div>
+<% end %>
+
+<%= link_to "Wyloguj się", destroy_supervisor_session_path, method: :delete, class: 'btn btn-danger float-right' %>
+

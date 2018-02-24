@@ -1,12 +1,24 @@
-<h1>Witaj, <%= current_employee.name %></h1>
-<% if session[:questions].nil? %>
-  <p>Gratulacje, zrobiłeś test!</p>
-<% elsif session[:questions].size < 3 %>
-  <p>Nie dokończyłeś quizu. Kliknij poniższy przycisk aby dokończyć.</p>
-  <%= link_to 'DOKOŃCZ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
-<% else %>
-  <p>Jeszcze nie zrobiłeś quizu. Kliknij na poniższy przycisk żeby rozpocząć test.</p>
-  <%= link_to 'ROZPOCZNIJ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
-<% end %>
+<div class="card">
+  <div class="card-header">
+    <h3 class="float-left">QUIZ</h3>
+    <%= link_to "Wyloguj się", destroy_employee_session_path, method: :delete, class: 'btn btn-danger float-right' %>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Witaj, <%= current_employee.name %></h5>
+    <p class="card-text">
+      <% if session[:questions].nil? %>
+        <p>Gratulacje, ukończyłeś test!</p>
+        <h3>Twój wynik to: <%= estimate_employee_quiz_result(current_employee) %>/3</h3>
+      <% elsif session[:questions].size < 3 %>
+        <p>Nie dokończyłeś quizu. Kliknij poniższy przycisk aby dokończyć.</p>
+        <%= link_to 'DOKOŃCZ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
+      <% else %>
+        <p>Jeszcze nie brałeś udziału w quizie. Kliknij na poniższy przycisk żeby rozpocząć test.</p>
+        <%= link_to 'ROZPOCZNIJ TEST', question_path(session[:questions].sample), class: 'btn btn-info' %>
+      <% end %>
+    </p>
+  </div>
+</div>
 
-<%= link_to "Wyloguj się", destroy_employee_session_path, method: :delete, class: 'btn btn-danger float-right' %>
+
+
