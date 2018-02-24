@@ -1,20 +1,25 @@
-<h2>Zaloguj jako przełożony</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-row col-6">
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= f.label :password %><br />
-      <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
-    </div>
-
-    <div class="actions">
-      <%= f.submit "Zaloguj się", class: 'btn btn-primary' %>
-    </div>
+<div class="card">
+  <div class="card-header">
+    Logowanie jako przełożony
   </div>
-<% end %>
+  <div class="card-body">
+    <h5 class="card-title ml-2">Podaj swój email i hasło</h5>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-row col-6">
+        <div class="form-group">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+        </div>
 
+        <div class="form-group">
+          <%= f.label :password, "Hasło" %><br />
+          <%= f.password_field :password, autocomplete: "off", class: 'form-control'  %>
+        </div>
+
+        <div class="actions">
+          <%= f.submit "Zaloguj się", class: 'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

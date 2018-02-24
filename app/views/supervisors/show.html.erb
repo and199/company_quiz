@@ -1,11 +1,18 @@
-<h1>Witaj, <%= current_supervisor.name %></h1>
-<h5 class="mt-4 mb-3">Lista Twoich pracowników i ich wyniki:</h5>
-
-<% current_supervisor.employees.each do |employee| %>
-  <div id="accordion" role="tablist" aria-multiselectable="true">
-  <%= render 'employee_list_item', employee: employee %>
+<div class="card">
+  <div class="card-header">
+    <h3 class="float-left">QUIZ</h3>
+    <%= link_to "Wyloguj się", destroy_supervisor_session_path, method: :delete, class: 'btn btn-danger float-right' %>
   </div>
-<% end %>
-
-<%= link_to "Wyloguj się", destroy_supervisor_session_path, method: :delete, class: 'btn btn-danger float-right' %>
+  <div class="card-body">
+    <h5 class="card-title">Witaj, <%= current_supervisor.name %></h5>
+    <p class="card-text">
+    <p class="mt-4 mb-3">Lista Twoich pracowników i ich wyniki:</p>
+      <% current_supervisor.employees.each do |employee| %>
+        <div id="accordion" role="tablist" aria-multiselectable="true">
+          <%= render 'employee_list_item', employee: employee %>
+        </div>
+      <% end %>
+    </p>
+  </div>
+</div>
 

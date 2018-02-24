@@ -1,22 +1,29 @@
-<div id="countdown">60</div>
 
-<h3><%= @question.content %></h3>
 
-<% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
 
-<%= form_for @question, url: answer_path(answer_id), method: :patch do |f| %>
-  <%= f.hidden_field 'question_id', value: @question.id, id: 'question_id' %>
-  <%= f.hidden_field 'answer_id', value: answer_id, id: 'answer_id' %>
-  <% @question.choices.shuffle.each do |choice| %>
-    <div class="radio">
-      <%= f.label :choices do %>
-        <%= f.radio_button(:choices, choice.id) %>
-        <%= choice.content %>
-      <% end %>
-    </div>
-  <% end %>
-  <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', disabled: true %>
-<% end %>
+<div class="card">
+  <div class="card-header">
+    <%= @question.content %>
+    <div id="countdown" class="badge badge-warning float-right">60</div>
+  </div>
+  <div class="card-body">
+    <p class="card-text">
+      <% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
+      <%= form_for @question, url: answer_path(answer_id), method: :patch do |f| %>
+        <%= f.hidden_field 'question_id', value: @question.id, id: 'question_id' %>
+        <%= f.hidden_field 'answer_id', value: answer_id, id: 'answer_id' %>
+        <% @question.choices.shuffle.each do |choice| %>
+          <div class="radio">
+            <%= f.label :choices do %>
+              <%= f.radio_button(:choices, choice.id) %>
+              <%= choice.content %>
+            <% end %>
+          </div>
+        <% end %>
+        <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', class: 'btn btn-primary mt-4', disabled: true %>
+    <% end %>
+    </p>
+  </div>
+</div>
 
 <%= javascript_include_tag 'question' %>
-
