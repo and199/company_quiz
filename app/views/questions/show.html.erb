@@ -1,10 +1,15 @@
 <div id="countdown">30</div>
+
 <h1><%= @question.content %></h1>
-<%= form_for @question, url: answer_path(@question), method: :patch do |f| %>
+
+<% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
+
+<%= form_for @question, url: answer_path(answer_id), method: :patch do |f| %>
+  <%= f.hidden_field 'id', value: @question.id %>
   <% @question.choices.shuffle.each do |choice| %>
     <div class="radio">
-    <%= f.radio_button(:choices, choice.id) %>
-    <%= f.label(:choices, choice.content ) %>
+      <%= f.radio_button(:choices, choice.id) %>
+      <%= f.label(:choices, choice.content ) %>
     </div>
   <% end %>
   <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', disabled: true %>
@@ -16,7 +21,7 @@
             $('#submit').removeAttr('disabled')
         });
 
-        var seconds = 3;
+        var seconds = 100;
         var counter = setInterval(function() {
             seconds--;
             if (seconds > 0) {
@@ -30,11 +35,12 @@
 
         function timeIsUpNextQuestion() {
             $.ajax({
-                url: "/answers",
                 type: 'PATCH',
+                beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+                url: "/answers/" + <%= answer_id %>,
                 data: {
-                    id: <%= @question.id %>
+                    question_id: <%= @question.id %>
                 }
-        })}
+            })}
     })
   </script>
