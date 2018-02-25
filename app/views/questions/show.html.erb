@@ -4,19 +4,23 @@
     <div id="countdown" class="badge badge-warning float-right">60</div>
   </div>
   <div class="card-body">
-    <p class="card-text">
+    <p class="card-text mb-0">
       <% answer_id = Answer.find_by(employee_id: current_employee.id, question_id: @question.id).id %>
       <%= form_for @question, url: answer_path(answer_id), method: :patch do |f| %>
         <%= f.hidden_field 'question_id', value: @question.id, id: 'question_id' %>
         <%= f.hidden_field 'answer_id', value: answer_id, id: 'answer_id' %>
-        <% @question.choices.shuffle.each do |choice| %>
-          <div class="radio">
-            <label>
-              <%= f.radio_button(:choices, choice.id) %>
-              <%= choice.content %>
-            </label>
-          </div>
-        <% end %>
+        <div class="list-group">
+          <% @question.choices.shuffle.each do |choice| %>
+            <div class="radio">
+              <label class="w-100">
+                <a class="list-group-item list-group-item-action">
+                  <%= f.radio_button(:choices, choice.id) %>
+                  <%= choice.content %>
+                </a>
+              </label>
+            </div>
+          <% end %>
+        </div>
         <%= f.submit 'Zatwierdź odpowiedź', id: 'submit', class: 'btn btn-primary mt-4', disabled: true %>
     <% end %>
     </p>

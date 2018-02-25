@@ -5,7 +5,7 @@ function disableCheck() {
 }
 
 function makeCountdown() {
-    var seconds = 6;
+    var seconds = 60;
     var counter = setInterval(function () {
         seconds--;
         if (seconds > 0) {
