@@ -30,10 +30,30 @@ question4 = Question.create(content: "Gdzie firma nie ma siedziby?", correct_ans
 question5 = Question.create(content: "Czym zajmuje się firma?", correct_answer: "IT")
 %w(IT Księgowość Transport Szkolenia).each { |choice| question5.choices.create(content: choice) }
 
-# Employee.all.each do |employee|
+
+# employees = Employee.all.to_a
+#
+#
+# employees.shuffle!.pop(2).each do |employee|
 #   questions = Question.all.to_a
 #   3.times do
 #     question = questions.shuffle!.pop
-#     employee.answers.create(question: question, content: question.choices.sample.choice)
+#     employee.answers.create(question: question, content: question.correct_answer)
+#   end
+# end
+#
+# employees.shuffle!.pop(2).each do |employee|
+#   questions = Question.all.to_a
+#   3.times do
+#     question = questions.shuffle!.pop
+#     employee.answers.create(question: question, content: [question.choices.sample.content, nil].sample)
+#   end
+# end
+#
+# employees.shuffle!.pop(2).each do |employee|
+#   questions = Question.all.to_a
+#   3.times do
+#     question = questions.shuffle!.pop
+#     employee.answers.create(question: question, content:  question.choices.sample.content)
 #   end
 # end

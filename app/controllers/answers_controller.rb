@@ -4,12 +4,11 @@ class AnswersController < ApplicationController
 
     if request.xhr?
       flash[:alert] = "Czas na odpowiedź dla poprzedniego pytania został przekroczony."
-      answer.update_attribute('content', "time_is_up")
+      answer.update_attribute('content', "Czas upłynął")
     else
       employee_choice = QuestionChoice.find(params[:question][:choices]).content
       answer.update_attribute('content', employee_choice)
     end
-
     remove_question_from_pool
     redirect_to next_step
   end
