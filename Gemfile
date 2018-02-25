@@ -34,9 +34,6 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'devise', '~> 4.4.1'
 gem 'bootstrap', '~> 4.0.0'
-gem 'hirb'
-gem 'pry-rails'
-gem 'pry-byebug'
 gem 'jquery-rails'
 gem 'pg'
 
@@ -48,6 +45,8 @@ group :development, :test do
   gem 'selenium-webdriver'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
+  gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
